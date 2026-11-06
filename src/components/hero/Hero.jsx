@@ -178,10 +178,10 @@ export default function Hero() {
           </div>
 
           {/* ── Right: the portrait ── */}
-          <div className="hidden lg:col-span-5 lg:block">
+          <div className="lg:col-span-5 flex justify-center lg:justify-end">
             <div
               data-hero-portrait
-              className="relative ml-auto max-w-sm aspect-[4/5] overflow-hidden rounded-card border border-line bg-paper-deep"
+              className="relative max-w-[260px] sm:max-w-xs lg:max-w-sm aspect-[4/5] overflow-hidden rounded-card border border-line bg-paper-deep w-full shadow-lg"
             >
               <img
                 src={p.portrait}

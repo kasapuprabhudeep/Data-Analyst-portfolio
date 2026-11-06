@@ -63,9 +63,9 @@ export default function ProjectDetailModal({ project, onClose }) {
           )}
 
           <div className="flex flex-wrap items-center gap-3 border-t border-line pt-6">
-            {project.repo && (
+            {(project.repo || project.github) && (
               <a
-                href={project.repo}
+                href={project.repo || project.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-primary"

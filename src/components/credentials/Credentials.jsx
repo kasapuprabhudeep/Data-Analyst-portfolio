@@ -35,16 +35,18 @@ export default function Credentials() {
                         {cert.description}
                       </p>
                     </div>
-                    <a
-                      href={cert.verify?.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="link-ext mt-1 shrink-0 text-[13.5px] font-medium"
-                    >
-                      <ShieldCheck className="h-4 w-4 text-accent-deep" />
-                      Verify
-                      <ArrowUpRight className="h-3.5 w-3.5" />
-                    </a>
+                    {(cert.verify?.url || cert.verificationUrl) && (
+                      <a
+                        href={cert.verify?.url || cert.verificationUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="link-ext mt-1 shrink-0 text-[13.5px] font-medium"
+                      >
+                        <ShieldCheck className="h-4 w-4 text-accent-deep" />
+                        Verify
+                        <ArrowUpRight className="h-3.5 w-3.5" />
+                      </a>
+                    )}
                   </div>
                 </li>
               ))}
