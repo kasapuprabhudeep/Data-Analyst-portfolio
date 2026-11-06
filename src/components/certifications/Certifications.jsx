@@ -15,7 +15,7 @@ export default function Certifications() {
         <SectionHeader
           badge="Verified Credentials"
           title="Professional Certifications & Training"
-          subtitle="Accredited certifications validating skills in Python data analysis, relational DBMS architecture, Power BI dashboards, and industry internship projects."
+          subtitle="Accredited credentials and internship certifications validating skills in Python data analysis and practical industry projects."
         />
 
         {/* Certifications Grid */}
@@ -37,7 +37,7 @@ export default function Certifications() {
             <span>All certificate verification links and image scans are easily editable directly in <code className="text-cyan-400 font-mono">src/data/portfolioData.js</code>.</span>
           </div>
           <span className="font-mono text-cyan-400 font-semibold flex-shrink-0">
-            5 Verified Certifications
+            {certifications.length} Verified Certifications
           </span>
         </div>
 

@@ -333,31 +333,8 @@ export const certifications = [
     image: "/images/certificates/internship-studio.png",
     verificationUrl: "https://internshipstudio.com/verify",
     topics: ["MySQL Queries", "Power BI Dashboards", "Sales Analytics", "DAX Measures"]
-  },
-  {
-    id: "umd-dbms",
-    title: "Database Management Systems",
-    issuer: "University of Maryland",
-    category: "Database Engineering",
-    description: "Academic credential covering relational database design, normalization, relational algebra, SQL transactions, and indexing.",
-    badge: "Academic Certification",
-    image: "/images/certificates/umd-dbms.png",
-    verificationUrl: "https://coursera.org/verify", // Replace with exact link
-    topics: ["Relational Algebra", "SQL Queries", "Schema Normalization", "Indexing", "ACID Properties"]
-  },
-  {
-    id: "microsoft-power-bi",
-    title: "Power BI Data Visualization & Analytics",
-    issuer: "Microsoft / Authorized Training",
-    category: "Business Intelligence",
-    description: "Professional training in Power BI dashboard design, data modeling, Power Query ETL, and DAX metric formulation.",
-    badge: "BI Specialization",
-    image: "/images/certificates/powerbi.png",
-    verificationUrl: "https://learn.microsoft.com/credentials", // Replace with exact link
-    topics: ["Power BI Desktop", "Power Query ETL", "Data Modeling", "DAX Formulas", "Executive Dashboards"]
   }
 ];
-
 export const educationHistory = [
   {
     degree: "B.Tech in Computer Science and Engineering",
