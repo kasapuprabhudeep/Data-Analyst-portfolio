@@ -11,6 +11,7 @@ export const personalInfo = {
   firstName: "Prabhudeep",
   headline: "Aspiring Data Analyst",
   subHeadline: "Turning Data Into Meaningful Business Insights.",
+  profileImage: "/profile.jpg", // Place your photo in the public folder as profile.jpg (or .png)
   tags: ["Data Analyst", "Python", "SQL", "Excel", "Power BI", "Tableau"],
   status: "Available for Internships & Full-time Roles",
   location: "Vizianagaram, Andhra Pradesh, India",
@@ -309,7 +310,7 @@ export const certifications = [
     description: "Hands-on certification covering data analysis using Python, Pandas, NumPy, Matplotlib, and statistical data processing.",
     badge: "Verified Credential",
     image: "/images/certificates/freecodecamp.svg",
-    verificationUrl: "https://freecodecamp.org/certification/kasapuprabhudeep/data-analysis-with-python-v7", // Replace with your link
+    verificationUrl: "https://drive.google.com/file/d/1belqZ1sTeEdKYirE3bbh6LwkE4TczCxB/view?usp=sharing", // Replace with your link
     topics: ["Pandas", "NumPy", "Matplotlib", "Seaborn", "Data Cleaning", "Statistical Modeling"]
   },
   {
@@ -320,7 +321,7 @@ export const certifications = [
     description: "Practical internship certification validating dataset preprocessing, exploratory analysis, and analytical problem-solving.",
     badge: "Internship Completion",
     image: "/images/certificates/future-interns.svg",
-    verificationUrl: "https://futureinterns.com/verify",
+    verificationUrl: "https://drive.google.com/file/d/1_WEuvtMgW4JPFc-PsHWp2_DqeXi1sS_N/view?usp=sharing",
     topics: ["Dataset Exploration", "Analytical Reasoning", "Python EDA", "Project Documentation"]
   },
   {
@@ -331,49 +332,49 @@ export const certifications = [
     description: "Trainee certification focused on practical retail analytics, MySQL querying, and Power BI dashboard engineering.",
     badge: "Trainee Credential",
     image: "/images/certificates/internship-studio.svg",
-    verificationUrl: "https://internshipstudio.com/verify",
+    verificationUrl: "https://drive.google.com/file/d/1S9wtxbQou2G0jBaKsfx1W9MRB0hm4S5E/view?usp=sharing",
     topics: ["MySQL Queries", "Power BI Dashboards", "Sales Analytics", "DAX Measures"]
   }
 ];
 
 export const educationHistory = [
-      {
-        degree: "B.Tech in Computer Science and Engineering",
-        institution: "JNTU-GV College of Engineering, Vizianagaram",
-        academicYear: "2026–2027",
-        status: "Final Year Student",
-        description: "Pursuing Bachelor of Technology with a dedicated specialization in data structures, relational database management systems, programming in Python/Java/C, and modern data analytics paradigms.",
-        highlights: [
-          "Comprehensive coursework in Database Management Systems (DBMS), Data Structures & Algorithms, and Operating Systems.",
-          "Active focus on practical data analysis, SQL database querying, and dashboard design.",
-          "Collaboration on academic software engineering and database projects including polyglot movie discovery platforms."
-        ]
-      }
-    ];
+  {
+    degree: "B.Tech in Computer Science and Engineering",
+    institution: "JNTU-GV College of Engineering, Vizianagaram",
+    academicYear: "2026–2027",
+    status: "Final Year Student",
+    description: "Pursuing Bachelor of Technology with a dedicated specialization in data structures, relational database management systems, programming in Python/Java/C, and modern data analytics paradigms.",
+    highlights: [
+      "Comprehensive coursework in Database Management Systems (DBMS), Data Structures & Algorithms, and Operating Systems.",
+      "Active focus on practical data analysis, SQL database querying, and dashboard design.",
+      "Collaboration on academic software engineering and database projects including polyglot movie discovery platforms."
+    ]
+  }
+];
 
-    // Interactive mock data for real-time Recharts dashboards in the portfolio
-    export const liveSalesData = [
-      { month: "Jan", sales: 42000, profit: 12400, target: 40000 },
-      { month: "Feb", sales: 48000, profit: 14800, target: 45000 },
-      { month: "Mar", sales: 55000, profit: 18200, target: 50000 },
-      { month: "Apr", sales: 51000, profit: 15600, target: 52000 },
-      { month: "May", sales: 63000, profit: 21500, target: 58000 },
-      { month: "Jun", sales: 72000, profit: 26300, target: 65000 },
-      { month: "Jul", sales: 68000, profit: 24100, target: 67000 },
-      { month: "Aug", sales: 79000, profit: 29500, target: 72000 }
-    ];
+// Interactive mock data for real-time Recharts dashboards in the portfolio
+export const liveSalesData = [
+  { month: "Jan", sales: 42000, profit: 12400, target: 40000 },
+  { month: "Feb", sales: 48000, profit: 14800, target: 45000 },
+  { month: "Mar", sales: 55000, profit: 18200, target: 50000 },
+  { month: "Apr", sales: 51000, profit: 15600, target: 52000 },
+  { month: "May", sales: 63000, profit: 21500, target: 58000 },
+  { month: "Jun", sales: 72000, profit: 26300, target: 65000 },
+  { month: "Jul", sales: 68000, profit: 24100, target: 67000 },
+  { month: "Aug", sales: 79000, profit: 29500, target: 72000 }
+];
 
-    export const categoryBreakdownData = [
-      { name: "Electronics", value: 38, fill: "#38BDF8" },
-      { name: "Apparel", value: 26, fill: "#0284C7" },
-      { name: "Home & Kitchen", value: 21, fill: "#22D3EE" },
-      { name: "Books & Media", value: 15, fill: "#818CF8" }
-    ];
+export const categoryBreakdownData = [
+  { name: "Electronics", value: 38, fill: "#38BDF8" },
+  { name: "Apparel", value: 26, fill: "#0284C7" },
+  { name: "Home & Kitchen", value: 21, fill: "#22D3EE" },
+  { name: "Books & Media", value: 15, fill: "#818CF8" }
+];
 
-    export const churnCohortData = [
-      { tenureGroup: "0-6 Mo", active: 62, churned: 38 },
-      { tenureGroup: "7-12 Mo", active: 76, churned: 24 },
-      { tenureGroup: "13-24 Mo", active: 88, churned: 12 },
-      { tenureGroup: "25+ Mo", active: 94, churned: 6 }
-    ];
+export const churnCohortData = [
+  { tenureGroup: "0-6 Mo", active: 62, churned: 38 },
+  { tenureGroup: "7-12 Mo", active: 76, churned: 24 },
+  { tenureGroup: "13-24 Mo", active: 88, churned: 12 },
+  { tenureGroup: "25+ Mo", active: 94, churned: 6 }
+];
 

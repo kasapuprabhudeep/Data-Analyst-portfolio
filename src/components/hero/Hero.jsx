@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   ArrowRight, 
@@ -16,6 +16,8 @@ import MetricPreviewChart from './MetricPreviewChart';
 import { personalInfo } from '../../data/portfolioData';
 
 export default function Hero() {
+  const [imageFailed, setImageFailed] = useState(false);
+
   const scrollToProjects = (e) => {
     e.preventDefault();
     const element = document.getElementById('projects');
@@ -217,10 +219,21 @@ export default function Hero() {
                     {/* Background analytical mesh in card */}
                     <div className="absolute inset-0 bg-grid-pattern opacity-30"></div>
                     
-                    {/* Sleek icon / Avatar */}
-                    <div className="relative z-10 w-24 h-24 rounded-full bg-gradient-to-tr from-electric-600 to-cyan-400 p-1 shadow-lg shadow-electric-500/30 mb-4 group-hover:scale-105 transition-transform duration-300">
-                      <div className="w-full h-full rounded-full bg-slate-950 flex items-center justify-center text-cyan-400 font-extrabold text-2xl tracking-wider">
-                        KP
+                    {/* Sleek Profile Photo / Avatar with Fallback */}
+                    <div className="relative z-10 w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-gradient-to-tr from-electric-600 via-cyan-400 to-blue-500 p-1 shadow-xl shadow-cyan-500/20 mb-4 group-hover:scale-105 transition-transform duration-300">
+                      <div className="w-full h-full rounded-full bg-slate-950 overflow-hidden flex items-center justify-center">
+                        {personalInfo.profileImage && !imageFailed ? (
+                          <img
+                            src={personalInfo.profileImage}
+                            alt={personalInfo.name}
+                            onError={() => setImageFailed(true)}
+                            className="w-full h-full object-cover object-top"
+                          />
+                        ) : (
+                          <span className="text-cyan-400 font-extrabold text-3xl tracking-wider">
+                            KP
+                          </span>
+                        )}
                       </div>
                     </div>
 
