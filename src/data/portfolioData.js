@@ -11,7 +11,7 @@ export const personalInfo = {
   firstName: "Prabhudeep",
   headline: "Aspiring Data Analyst",
   subHeadline: "Turning Data Into Meaningful Business Insights.",
-  profileImage: "/profile.jpg", // Place your photo in the public folder as profile.jpg (or .png)
+  profileImage: "/profile.jpeg",
   tags: ["Data Analyst", "Python", "SQL", "Excel", "Power BI", "Tableau"],
   status: "Available for Internships & Full-time Roles",
   location: "Vizianagaram, Andhra Pradesh, India",
