@@ -17,22 +17,22 @@ export const personalInfo = {
   institution: "JNTU-GV College of Engineering, Vizianagaram",
   degree: "B.Tech in Computer Science and Engineering",
   academicYear: "2026–2027",
-  
+
   careerObjective: "To become a professional Data Analyst and solve real-world business problems using data analytics, visualization, SQL, Python, and business intelligence tools.",
-  
+
   bio: "I am a Computer Science Engineering student passionate about transforming raw data into meaningful business insights. I work with Python, SQL, Excel, Power BI, and Tableau to explore datasets, identify patterns, build interactive dashboards, and communicate data-driven insights. I enjoy solving practical business problems and continuously developing my analytical and technical skills.",
-  
+
   socialLinks: {
     github: "https://github.com/kasapuprabhudeep",
-    linkedin: "https://www.linkedin.com/in/kasapu-prabhudeep/", // Replace with your exact LinkedIn profile URL
-    email: "prabhudeep.kasapu@gmail.com", // Replace with your primary email address
+    linkedin: "https://www.linkedin.com/in/kasapurabhudeep/", // Replace with your exact LinkedIn profile URL
+    email: "kasapuprabhudeep@gmail.com", // Replace with your primary email address
     phonePlaceholder: "+91 98765 43210" // Optional phone contact
   },
 
   resume: {
-    fileName: "Kasapu_Prabhudeep_Resume.pdf",
-    filePath: "/resume.pdf", // Place your PDF in the /public folder as resume.pdf
-    viewPath: "/resume.pdf",
+    fileName: "Prabhudeep_Resume.pdf",
+    filePath: "/Prabhudeep_Resume.pdf",
+    viewPath: "/Prabhudeep_Resume.pdf",
     lastUpdated: "November 2026"
   }
 };
@@ -149,7 +149,7 @@ export const projects = [
       { label: "Queries Created", value: "25+ Analytical SQL Views" },
       { label: "Dashboard Pages", value: "3 Dynamic Reports" }
     ],
-    github: "https://github.com/kasapuprabhudeep", // Replace with specific repository link if separate
+    github: "https://github.com/kasapuprabhudeep/Sales-dashboard-analysis", // Replace with specific repository link if separate
     liveDemo: null,
     dashboardPreviewType: "retail",
     image: "/images/projects/retail-sales.png"
@@ -226,7 +226,7 @@ export const projects = [
       { label: "Domain", value: "Exploratory Analytics" },
       { label: "Deliverable", value: "Cleaned Data & Insights" }
     ],
-    github: "https://github.com/kasapuprabhudeep",
+    github: "https://github.com/kasapuprabhudeep/FUTURE_DS_01",
     liveDemo: null,
     dashboardPreviewType: "stats",
     image: "/images/projects/future-ds-01.png"
@@ -251,7 +251,7 @@ export const projects = [
       { label: "Focus", value: "Trend & Hypothesis Testing" },
       { label: "Deliverable", value: "Analytical Report" }
     ],
-    github: "https://github.com/kasapuprabhudeep",
+    github: "https://github.com/kasapuprabhudeep/FUTURE_DS_02",
     liveDemo: null,
     dashboardPreviewType: "trend",
     image: "/images/projects/future-ds-02.png"
