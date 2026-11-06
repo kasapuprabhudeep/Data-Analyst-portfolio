@@ -278,7 +278,7 @@ export const internshipExperience = [
     hasCertificate: true,
     certificateTitle: "Future Interns – Data Science & Analytics Certificate",
     certificateImage: "/images/certificates/future-interns.svg",
-    verificationLink: "https://futureinterns.com/verify" // Replace with exact verification link
+    verificationLink: "https://drive.google.com/file/d/1_WEuvtMgW4JPFc-PsHWp2_DqeXi1sS_N/view?usp=sharing"
   },
   {
     id: "internship-studio",
@@ -297,7 +297,7 @@ export const internshipExperience = [
     hasCertificate: true,
     certificateTitle: "Internship Studio – Data Analytics Trainee Certificate",
     certificateImage: "/images/certificates/internship-studio.svg",
-    verificationLink: "https://internshipstudio.com/verify" // Replace with exact verification link
+    verificationLink: "https://drive.google.com/file/d/1S9wtxbQou2G0jBaKsfx1W9MRB0hm4S5E/view?usp=sharing"
   }
 ];
 

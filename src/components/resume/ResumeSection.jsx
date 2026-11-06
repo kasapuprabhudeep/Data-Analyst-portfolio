@@ -188,6 +188,15 @@ export default function ResumeSection() {
               </div>
             </div>
 
+            {/* Embedded PDF Viewer */}
+            <div className="mt-4 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 h-[58vh] hidden sm:block">
+              <iframe
+                src={`${personalInfo.resume.filePath}#toolbar=0&navpanes=0`}
+                title="Resume PDF Document"
+                className="w-full h-full"
+              />
+            </div>
+
             {/* Document Details Body */}
             <div className="mt-6 space-y-6 text-xs sm:text-sm">
               <div>
