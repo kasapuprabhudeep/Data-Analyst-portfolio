@@ -276,7 +276,7 @@ export const internshipExperience = [
     skillsApplied: ["Python", "Data Exploration", "Data Cleaning", "Data Visualization", "Problem Solving", "Documentation"],
     hasCertificate: true,
     certificateTitle: "Future Interns – Data Science & Analytics Certificate",
-    certificateImage: "/images/certificates/future-interns.png",
+    certificateImage: "/images/certificates/future-interns.svg",
     verificationLink: "https://futureinterns.com/verify" // Replace with exact verification link
   },
   {
@@ -295,7 +295,7 @@ export const internshipExperience = [
     skillsApplied: ["MySQL", "Python", "Power BI", "Retail Sales Analysis", "DAX", "Data Storytelling"],
     hasCertificate: true,
     certificateTitle: "Internship Studio – Data Analytics Trainee Certificate",
-    certificateImage: "/images/certificates/internship-studio.png",
+    certificateImage: "/images/certificates/internship-studio.svg",
     verificationLink: "https://internshipstudio.com/verify" // Replace with exact verification link
   }
 ];
@@ -308,7 +308,7 @@ export const certifications = [
     category: "Data Analytics & Python",
     description: "Hands-on certification covering data analysis using Python, Pandas, NumPy, Matplotlib, and statistical data processing.",
     badge: "Verified Credential",
-    image: "/images/certificates/freecodecamp.png",
+    image: "/images/certificates/freecodecamp.svg",
     verificationUrl: "https://freecodecamp.org/certification/kasapuprabhudeep/data-analysis-with-python-v7", // Replace with your link
     topics: ["Pandas", "NumPy", "Matplotlib", "Seaborn", "Data Cleaning", "Statistical Modeling"]
   },
@@ -319,7 +319,7 @@ export const certifications = [
     category: "Industry Internship",
     description: "Practical internship certification validating dataset preprocessing, exploratory analysis, and analytical problem-solving.",
     badge: "Internship Completion",
-    image: "/images/certificates/future-interns.png",
+    image: "/images/certificates/future-interns.svg",
     verificationUrl: "https://futureinterns.com/verify",
     topics: ["Dataset Exploration", "Analytical Reasoning", "Python EDA", "Project Documentation"]
   },
@@ -330,7 +330,7 @@ export const certifications = [
     category: "Industry Training",
     description: "Trainee certification focused on practical retail analytics, MySQL querying, and Power BI dashboard engineering.",
     badge: "Trainee Credential",
-    image: "/images/certificates/internship-studio.png",
+    image: "/images/certificates/internship-studio.svg",
     verificationUrl: "https://internshipstudio.com/verify",
     topics: ["MySQL Queries", "Power BI Dashboards", "Sales Analytics", "DAX Measures"]
   }

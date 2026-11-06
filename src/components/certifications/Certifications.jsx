@@ -3,7 +3,7 @@ import SectionHeader from '../common/SectionHeader';
 import CertificateCard from './CertificateCard';
 import Modal from '../common/Modal';
 import { certifications } from '../../data/portfolioData';
-import { Award, ExternalLink, ShieldCheck, CheckCircle } from 'lucide-react';
+import { Award, ExternalLink, ShieldCheck, CheckCircle, Eye } from 'lucide-react';
 
 export default function Certifications() {
   const [selectedCert, setSelectedCert] = useState(null);
@@ -49,52 +49,51 @@ export default function Certifications() {
           isOpen={!!selectedCert}
           onClose={() => setSelectedCert(null)}
           title={selectedCert.title}
-          maxWidth="max-w-lg"
+          maxWidth="max-w-3xl"
         >
           <div className="space-y-4">
-            <div className="aspect-[4/3] rounded-xl bg-slate-950 border border-slate-800 p-6 flex flex-col items-center justify-center text-center relative overflow-hidden">
-              <div className="w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-3">
-                <Award className="w-8 h-8" />
-              </div>
-
-              <span className="text-xs uppercase font-mono tracking-widest text-slate-400">
-                {selectedCert.issuer}
-              </span>
-
-              <h4 className="text-base font-bold text-white mt-1">
-                {selectedCert.title}
-              </h4>
-
-              <p className="text-xs text-cyan-400 mt-1">
-                Credential Awarded to: Kasapu Prabhudeep
-              </p>
-
-              <p className="text-[11px] text-slate-400 max-w-sm mt-3">
-                Place your high-resolution scanned certificate image in <code className="text-cyan-300 font-mono">{selectedCert.image}</code> to automatically display your official document.
-              </p>
-
-              <div className="mt-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
-                <ShieldCheck className="w-4 h-4" />
-                <span>{selectedCert.badge}</span>
-              </div>
+            <div className="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-950 shadow-2xl">
+              <img
+                src={selectedCert.image}
+                alt={`${selectedCert.title} Document`}
+                className="w-full h-auto object-contain"
+              />
             </div>
 
-            <div className="flex items-center justify-between pt-2">
-              <span className="text-xs text-slate-400">
-                Issuer: <strong>{selectedCert.issuer}</strong>
-              </span>
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-slate-500 dark:text-slate-400">
+                  Issuer: <strong className="text-slate-800 dark:text-slate-200">{selectedCert.issuer}</strong>
+                </span>
+                <span className="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500 border border-emerald-500/30 font-semibold flex items-center gap-1">
+                  <ShieldCheck className="w-3.5 h-3.5" />
+                  {selectedCert.badge}
+                </span>
+              </div>
 
-              {selectedCert.verificationUrl && (
+              <div className="flex items-center gap-2">
                 <a
-                  href={selectedCert.verificationUrl}
+                  href={selectedCert.image}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-cyan-400 hover:text-cyan-300"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-cyan-400 transition-colors"
                 >
-                  <span>Verify Credential Online</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
+                  <Eye className="w-3.5 h-3.5 text-cyan-400" />
+                  <span>Open in Full Tab</span>
                 </a>
-              )}
+
+                {selectedCert.verificationUrl && (
+                  <a
+                    href={selectedCert.verificationUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-electric-600 hover:bg-electric-500 text-white shadow transition-colors"
+                  >
+                    <span>Verify Credential</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                )}
+              </div>
             </div>
           </div>
         </Modal>

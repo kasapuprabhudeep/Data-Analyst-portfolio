@@ -37,6 +37,25 @@ export default function CertificateCard({ cert, index, onPreview }) {
           {cert.title}
         </h3>
 
+        {/* Certificate Visual Thumbnail */}
+        {cert.image && (
+          <div 
+            onClick={() => onPreview(cert)}
+            className="my-3 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-950 cursor-pointer group/thumb hover:border-cyan-400/50 transition-all relative"
+          >
+            <img 
+              src={cert.image} 
+              alt={cert.title} 
+              className="w-full h-32 object-cover object-top opacity-90 group-hover/thumb:opacity-100 group-hover/thumb:scale-[1.02] transition-all duration-300" 
+            />
+            <div className="absolute inset-0 bg-slate-950/20 group-hover/thumb:bg-slate-950/40 flex items-center justify-center opacity-0 group-hover/thumb:opacity-100 transition-opacity">
+              <span className="px-3 py-1 rounded-lg bg-slate-900/95 text-cyan-300 text-xs font-semibold backdrop-blur-md border border-cyan-500/40 flex items-center gap-1.5 shadow-xl">
+                <Eye className="w-3.5 h-3.5" /> Enlarge Certificate
+              </span>
+            </div>
+          </div>
+        )}
+
         {/* Description */}
         <p className="text-xs text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
           {cert.description}
