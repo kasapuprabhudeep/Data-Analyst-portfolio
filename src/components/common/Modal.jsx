@@ -1,71 +1,96 @@
-import React, { useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
 import { X } from 'lucide-react';
 
-export default function Modal({ isOpen, onClose, title, children, maxWidth = 'max-w-3xl' }) {
+/**
+ * Accessible modal, paper-styled, pure CSS transitions.
+ *  • Escape closes · backdrop click closes · focus is trapped inside.
+ *  • Focus returns to the trigger element on close.
+ */
+export default function Modal({ isOpen, onClose, title, children }) {
+  const panelRef = useRef(null);
+  const [rendered, setRendered] = useState(isOpen);
+  const [entering, setEntering] = useState(false);
+
+  /* Mount / unmount with a two-frame delay so CSS transitions run */
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape') onClose();
+    if (isOpen) {
+      setRendered(true);
+      const raf = requestAnimationFrame(() => requestAnimationFrame(() => setEntering(true)));
+      return () => cancelAnimationFrame(raf);
+    }
+    setEntering(false);
+    const t = setTimeout(() => setRendered(false), 240);
+    return () => clearTimeout(t);
+  }, [isOpen]);
+
+  /* Lock scroll, listen for Escape / Tab, manage focus */
+  useEffect(() => {
+    if (!isOpen) return undefined;
+    const prevFocus = document.activeElement;
+
+    document.body.style.overflow = 'hidden';
+    panelRef.current?.focus();
+
+    const onKey = (e) => {
+      if (e.key === 'Escape') {
+        e.stopPropagation();
+        onClose();
+        return;
+      }
+      if (e.key !== 'Tab' || !panelRef.current) return;
+      const focusables = panelRef.current.querySelectorAll(
+        'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
 
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-      window.addEventListener('keydown', handleKeyDown);
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-
+    window.addEventListener('keydown', onKey);
     return () => {
-      document.body.style.overflow = 'unset';
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+      if (prevFocus?.focus) prevFocus.focus();
     };
   }, [isOpen, onClose]);
 
+  if (!rendered) return null;
+
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8">
-          {/* Backdrop */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+    <div className="fixed inset-0 z-[60]">
+      <div
+        className={`modal-backdrop ${entering ? 'opacity-100' : 'opacity-0'}`}
+        onClick={onClose}
+        aria-hidden="true"
+      />
+      <div
+        ref={panelRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label={title}
+        tabIndex={-1}
+        className={`modal-panel ${entering ? 'is-open' : ''}`}
+      >
+        <div className="flex items-start justify-between gap-6 border-b border-line px-6 py-5 md:px-9">
+          <h3 className="font-display text-display-3 pt-1">{title}</h3>
+          <button
+            type="button"
             onClick={onClose}
-            className="fixed inset-0 bg-slate-950/80 backdrop-blur-md transition-opacity"
-            aria-hidden="true"
-          />
-
-          {/* Modal Dialog Card */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 15 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 15 }}
-            transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className={`relative w-full ${maxWidth} max-h-[90vh] overflow-y-auto rounded-2xl bg-white dark:bg-navy-900 
-                       border border-slate-200 dark:border-slate-800 shadow-2xl z-10 p-6 md:p-8`}
+            aria-label="Close dialog"
+            className="mt-1 rounded-full border border-line p-2 text-ink-mute transition-colors duration-200 hover:border-ink hover:text-ink"
           >
-            {/* Header */}
-            <div className="flex items-center justify-between pb-4 mb-4 border-b border-slate-200 dark:border-slate-800">
-              <h3 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">
-                {title}
-              </h3>
-              <button
-                onClick={onClose}
-                aria-label="Close dialog"
-                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Content */}
-            <div className="mt-2 text-slate-700 dark:text-slate-300">
-              {children}
-            </div>
-          </motion.div>
+            <X className="h-4 w-4" />
+          </button>
         </div>
-      )}
-    </AnimatePresence>
+        <div className="px-6 py-6 md:px-9 md:py-8">{children}</div>
+      </div>
+    </div>
   );
 }
-

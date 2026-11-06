@@ -1,99 +1,79 @@
-import React, { useState } from 'react';
-import SectionHeader from '../common/SectionHeader';
-import TimelineItem from './TimelineItem';
-import Modal from '../common/Modal';
-import { internshipExperience } from '../../data/portfolioData';
-import { Award, ExternalLink, ShieldCheck, FileCheck, Eye } from 'lucide-react';
+import React from 'react';
+import { ArrowUpRight, BadgeCheck } from 'lucide-react';
+import { experience } from '../../data/portfolioData';
+import SectionHead from '../common/SectionHead';
 
+/** Experience — internship ledger with verifiable proof links. */
 export default function Experience() {
-  const [selectedCert, setSelectedCert] = useState(null);
-
   return (
-    <section id="experience" className="py-20 md:py-28 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <SectionHeader
-          badge="Professional Timeline"
-          title="Internship & Industry Experience"
-          subtitle="Real-world data analytics roles executing end-to-end exploratory analysis, database querying, and business intelligence reporting."
+    <section id="experience" className="bg-paper-deep">
+      <div className="wrap py-24 md:py-32">
+        <SectionHead
+          title="Experience"
+          meta={`${experience.length} internships · certificates verifiable`}
         />
 
-        {/* Timeline container */}
-        <div className="relative mt-12 md:mt-16">
-          {/* Vertical spine line */}
-          <div className="absolute top-0 bottom-0 left-4 md:left-1/2 -translate-x-1/2 w-0.5 bg-gradient-to-b from-electric-500 via-cyan-400 to-electric-600/20" />
+        <ol className="border-t border-line">
+          {experience.map((role) => (
+            <li key={role.id} data-reveal className="border-b border-line">
+              <div className="grid gap-6 py-9 md:py-10 lg:grid-cols-12 lg:gap-8">
+                {/* When & where */}
+                <div className="lg:col-span-3">
+                  <p className="font-mono text-[12px] text-ink-mute">
+                    {role.period || role.kind}
+                  </p>
+                  {role.period && (
+                    <p className="mt-1 font-mono text-[11px] text-ink-faint">{role.kind}</p>
+                  )}
+                </div>
 
-          {/* Timeline Nodes */}
-          <div className="space-y-12">
-            {internshipExperience.map((exp, index) => (
-              <TimelineItem
-                key={exp.id}
-                exp={exp}
-                index={index}
-                onPreviewCertificate={(item) => setSelectedCert(item)}
-              />
-            ))}
-          </div>
-        </div>
+                {/* The role */}
+                <div className="lg:col-span-9">
+                  <h3 className="font-display text-display-3 text-ink">{role.role}</h3>
+                  <p className="mt-0.5 font-medium text-ink-soft">{role.organization}</p>
 
+                  <p className="mt-4 max-w-[64ch] leading-relaxed text-ink-soft">
+                    {role.summary}
+                  </p>
+
+                  <ul className="mt-5 space-y-2">
+                    {role.highlights.map((highlight, i) => (
+                      <li key={i} className="flex gap-3 text-[15px] leading-relaxed">
+                        <span className="mt-0.5 shrink-0 text-accent" aria-hidden="true">
+                          —
+                        </span>
+                        <span className="max-w-[70ch] text-ink">{highlight}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+                    <div className="flex flex-wrap gap-1.5">
+                      {role.tools.map((tool) => (
+                        <span key={tool} className="chip !text-[11px]">
+                          {tool}
+                        </span>
+                      ))}
+                    </div>
+                    {role.proof?.url && (
+                      <a
+                        href={role.proof.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="link-ext text-[14px] font-medium"
+                      >
+                        <BadgeCheck className="h-4 w-4 text-accent-deep" />
+                        {role.proof?.label || 'Verify certificate'}
+                        <ArrowUpRight className="h-3.5 w-3.5" />
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ol>
       </div>
-
-      {/* Certificate Preview Modal */}
-      {selectedCert && (
-        <Modal
-          isOpen={!!selectedCert}
-          onClose={() => setSelectedCert(null)}
-          title={selectedCert.certificateTitle || "Internship Certificate"}
-          maxWidth="max-w-3xl"
-        >
-          <div className="space-y-4">
-            <div className="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-950 shadow-2xl">
-              <img
-                src={selectedCert.certificateImage}
-                alt={`${selectedCert.company} Certificate`}
-                className="w-full h-auto object-contain"
-              />
-            </div>
-
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
-              <div className="flex items-center gap-2">
-                <span className="text-xs text-slate-500 dark:text-slate-400">
-                  Organization: <strong className="text-slate-800 dark:text-slate-200">{selectedCert.company}</strong>
-                </span>
-                <span className="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500 border border-emerald-500/30 font-semibold flex items-center gap-1">
-                  <ShieldCheck className="w-3.5 h-3.5" />
-                  Verified Internship Completion
-                </span>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <a
-                  href={selectedCert.certificateImage}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-cyan-400 transition-colors"
-                >
-                  <Eye className="w-3.5 h-3.5 text-cyan-400" />
-                  <span>Open Full Document</span>
-                </a>
-
-                {selectedCert.verificationLink && (
-                  <a
-                    href={selectedCert.verificationLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-electric-600 hover:bg-electric-500 text-white shadow transition-colors"
-                  >
-                    <span>Verification Portal</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
-                )}
-              </div>
-            </div>
-          </div>
-        </Modal>
-      )}
     </section>
   );
 }
-

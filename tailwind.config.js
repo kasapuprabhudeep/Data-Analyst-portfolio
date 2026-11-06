@@ -2,45 +2,56 @@
 export default {
   content: [
     "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,jsx}",
   ],
-  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        navy: {
-          950: '#060B16',
-          900: '#0B132B',
-          850: '#0F1A36',
-          800: '#1C2541',
-          700: '#273458',
+        /* ── Editorial paper palette ─────────────────────────────
+           paper   page background (warm, print-like)
+           ink     near-black text, slightly warm
+           accent  signal orange: graphics, links, highlights      */
+        paper: {
+          DEFAULT: '#FAF8F4',
+          deep: '#F3EFE7',
+          sunken: '#EBE6DC',
+          raised: '#FFFFFF'
         },
-        electric: {
-          400: '#38BDF8',
-          500: '#0284C7',
-          600: '#0369A1',
+        ink: {
+          DEFAULT: '#1C1A15',
+          soft: '#433F37',
+          mute: '#6F6A5E',
+          faint: '#A19B8C'
         },
-        cyanAccent: {
-          400: '#22D3EE',
-          500: '#06B6D4',
+        line: {
+          DEFAULT: '#E3DED3',
+          strong: '#CFC9BB'
+        },
+        accent: {
+          DEFAULT: '#E4572E',
+          deep: '#BE3A16',
+          soft: '#FBEAE2'
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
-        mono: ['JetBrains Mono', 'Fira Code', 'monospace']
+        display: ['"Newsreader"', 'Georgia', 'serif'],
+        sans: ['"Hanken Grotesk"', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
+        mono: ['"IBM Plex Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace']
       },
-      animation: {
-        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'float': 'float 6s ease-in-out infinite',
+      fontSize: {
+        'display-1': ['clamp(3.75rem, 8.5vw, 6rem)', { lineHeight: '0.98', letterSpacing: '-0.02em' }],
+        'display-2': ['clamp(2.5rem, 5vw, 3.5rem)', { lineHeight: '1.05', letterSpacing: '-0.02em' }],
+        'display-3': ['clamp(1.75rem, 3vw, 2.25rem)', { lineHeight: '1.15', letterSpacing: '-0.015em' }],
       },
-      keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-10px)' },
-        }
-      }
+      letterSpacing: {
+        tightest: '-0.03em',
+        caps: '0.05em',
+      },
+      borderRadius: {
+        card: '0.875rem',
+        control: '0.625rem',
+      },
     },
   },
   plugins: [],
 }
-

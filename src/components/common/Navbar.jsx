@@ -1,179 +1,185 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, FileDown, Database } from 'lucide-react';
-import ThemeToggle from './ThemeToggle';
+import React, { useEffect, useState } from 'react';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { personalInfo } from '../../data/portfolioData';
+import { useActiveSection } from '../../hooks/useActiveSection';
 
 const NAV_LINKS = [
-  { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Experience', href: '#experience' },
-  { name: 'Certifications', href: '#certifications' },
-  { name: 'Education', href: '#education' },
-  { name: 'Contact', href: '#contact' },
+  { id: 'work', label: 'Work' },
+  { id: 'about', label: 'About' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'credentials', label: 'Credentials' },
+  { id: 'contact', label: 'Contact' },
 ];
 
-export default function Navbar({ isDark, toggleTheme, activeSection }) {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+const OverLay_LINKS = [{ id: 'home', label: 'Home' }, ...NAV_LINKS];
+
+/**
+ * Editorial top bar. Transparent over the hero, paper + hairline when
+ * scrolled. Mobile uses a full-screen overlay menu.
+ */
+export default function Navbar({ sectionIds }) {
+  const active = useActiveSection(sectionIds);
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const handleLinkClick = (e, href) => {
+  /* Freeze the page under the overlay */
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
+
+  const goTo = (id) => (e) => {
     e.preventDefault();
-    setMobileMenuOpen(false);
-    const targetId = href.replace('#', '');
-    const element = document.getElementById(targetId);
-    if (element) {
-      const topOffset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - topOffset;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
+    setMenuOpen(false);
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-slate-900/90 dark:bg-navy-950/90 backdrop-blur-md shadow-lg shadow-black/10 dark:shadow-cyan-950/20 border-b border-slate-200/20 dark:border-slate-800/80 py-3'
-          : 'bg-transparent py-5'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-          
-          {/* Logo / Brand */}
+    <>
+      <header
+        className={`fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color] duration-300 ${
+          scrolled
+            ? 'border-line bg-paper/85 backdrop-blur-md'
+            : 'border-transparent bg-transparent'
+        }`}
+      >
+        <div className="wrap flex h-16 items-center justify-between">
+          {/* Wordmark */}
           <a
             href="#home"
-            onClick={(e) => handleLinkClick(e, '#home')}
-            className="flex items-center gap-2.5 group"
+            onClick={goTo('home')}
+            className="font-display text-xl leading-none tracking-tight text-ink"
+            aria-label="Back to top — Kasapu Prabhudeep"
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-electric-600 to-cyan-400 p-0.5 shadow-md shadow-electric-500/20 group-hover:shadow-electric-500/40 transition-shadow">
-              <div className="w-full h-full bg-white dark:bg-navy-900 rounded-[10px] flex items-center justify-center">
-                <Database className="w-5 h-5 text-electric-600 dark:text-cyan-400 group-hover:scale-110 transition-transform" />
-              </div>
-            </div>
-            <div>
-              <span className="font-extrabold text-lg tracking-tight text-slate-900 dark:text-white flex items-center gap-1">
-                Prabhudeep <span className="text-electric-500 dark:text-cyan-400">.</span>
-              </span>
-              <span className="block text-[10px] uppercase font-semibold tracking-wider text-slate-500 dark:text-slate-400">
-                Data Analyst
-              </span>
-            </div>
+            Kasapu Prabhudeep<span className="text-accent">.</span>
           </a>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden xl:flex items-center gap-1 2xl:gap-2">
-            {NAV_LINKS.map((link) => {
-              const linkId = link.href.replace('#', '');
-              const isActive = activeSection === linkId;
-              return (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={(e) => handleLinkClick(e, link.href)}
-                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 relative ${
-                    isActive
-                      ? 'text-electric-600 dark:text-cyan-400 font-semibold bg-electric-500/10 dark:bg-cyan-500/10'
-                      : 'text-slate-600 dark:text-slate-300 hover:text-electric-600 dark:hover:text-cyan-300 hover:bg-slate-100 dark:hover:bg-slate-800/60'
-                  }`}
-                >
-                  {link.name}
-                  {isActive && (
-                    <span className="absolute bottom-0 left-3 right-3 h-0.5 bg-gradient-to-r from-electric-500 to-cyan-400 rounded-full" />
-                  )}
-                </a>
-              );
-            })}
+          {/* Desktop links — dim label slides away on hover */}
+          <nav aria-label="Primary" className="hidden items-center gap-7 md:flex">
+            {NAV_LINKS.map(({ id, label }) => (
+              <a
+                key={id}
+                href={`#${id}`}
+                onClick={goTo(id)}
+                aria-current={active === id ? 'true' : undefined}
+                className={`group relative block h-[1.05em] overflow-hidden font-mono text-[13px] leading-[1.05em] ${
+                  active === id ? 'text-ink' : 'text-ink-mute'
+                } transition-colors duration-200`}
+              >
+                {active === id && (
+                  <span className="absolute -left-3.5 top-1/2 h-1 w-1 -translate-y-1/2 rounded-full bg-accent" />
+                )}
+                <span className="block transition-transform duration-200 ease-out group-hover:-translate-y-full">
+                  {label}
+                </span>
+                <span className="absolute inset-0 block translate-y-full text-accent-deep transition-transform duration-200 ease-out group-hover:translate-y-0">
+                  {label}
+                </span>
+              </a>
+            ))}
           </nav>
 
-          {/* Desktop Actions */}
-          <div className="hidden lg:flex items-center gap-3">
-            <ThemeToggle isDark={isDark} toggleTheme={toggleTheme} />
+          <div className="flex items-center gap-4">
+            {/* Availability readout */}
+            <span className="hidden items-center gap-2 font-mono text-[11px] uppercase tracking-caps text-ink-mute lg:inline-flex">
+              <span className="dot" />
+              Open to work
+            </span>
 
+            {/* Résumé — opens the PDF viewer */}
             <a
               href={personalInfo.resume.filePath}
-              download={personalInfo.resume.fileName}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white 
-                         bg-gradient-to-r from-electric-600 to-cyan-500 hover:from-electric-500 hover:to-cyan-400 
-                         shadow-md shadow-electric-600/25 hover:shadow-electric-600/40 transition-all duration-200 active:scale-95"
+              className="btn btn-primary !px-4 !py-2 !text-[13px] hidden sm:inline-flex"
             >
-              <FileDown className="w-4 h-4" />
-              <span>Resume</span>
+              Résumé
+              <ArrowUpRight className="h-3.5 w-3.5" />
             </a>
-          </div>
 
-          {/* Mobile Menu Button & Theme Toggle */}
-          <div className="flex items-center gap-2 xl:hidden">
-            <ThemeToggle isDark={isDark} toggleTheme={toggleTheme} />
-            
+            {/* Mobile menu trigger */}
             <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               type="button"
-              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-              className="p-2 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 focus:outline-none"
+              onClick={() => setMenuOpen(true)}
+              aria-label="Open menu"
+              aria-expanded={menuOpen}
+              className="rounded-control border border-line p-2 text-ink transition-colors duration-200 hover:border-ink md:hidden"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              <Menu className="h-5 w-5" />
             </button>
           </div>
-
         </div>
-      </div>
+      </header>
 
-      {/* Mobile Drawer */}
-      {mobileMenuOpen && (
-        <div className="xl:hidden bg-white/95 dark:bg-navy-950/95 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 px-4 pt-3 pb-6 shadow-2xl transition-all">
-          <div className="flex flex-col space-y-1">
-            {NAV_LINKS.map((link) => {
-              const linkId = link.href.replace('#', '');
-              const isActive = activeSection === linkId;
-              return (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={(e) => handleLinkClick(e, link.href)}
-                  className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${
-                    isActive
-                      ? 'bg-electric-500/10 text-electric-600 dark:text-cyan-400 font-semibold border-l-4 border-cyan-400'
-                      : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60'
-                  }`}
-                >
-                  {link.name}
-                </a>
-              );
-            })}
+      {/* Mobile overlay menu */}
+      <div
+        className={`fixed inset-0 z-[70] flex flex-col bg-paper transition-opacity duration-300 md:hidden ${
+          menuOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
+        }`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site menu"
+        hidden={!menuOpen && undefined}
+      >
+        <div className="wrap flex h-16 items-center justify-between">
+          <span className="font-display text-xl tracking-tight text-ink">
+            Kasapu Prabhudeep<span className="text-accent">.</span>
+          </span>
+          <button
+            type="button"
+            onClick={() => setMenuOpen(false)}
+            aria-label="Close menu"
+            className="rounded-control border border-line p-2 text-ink"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
 
-            <div className="pt-3 mt-2 border-t border-slate-200 dark:border-slate-800">
-              <a
-                href={personalInfo.resume.filePath}
-                download={personalInfo.resume.fileName}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setMobileMenuOpen(false)}
-                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-electric-600 to-cyan-500 shadow-md shadow-electric-600/30"
-              >
-                <FileDown className="w-4 h-4" />
-                <span>Download Resume</span>
-              </a>
-            </div>
+        <nav aria-label="Mobile" className="wrap flex flex-1 flex-col justify-center gap-2">
+          {OverLay_LINKS.map(({ id, label }, i) => (
+            <a
+              key={id}
+              href={`#${id}`}
+              onClick={goTo(id)}
+              className={`font-display text-display-2 text-ink transition-all duration-500 ${
+                menuOpen ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
+              }`}
+              style={{
+                transitionDelay: menuOpen ? `${80 + i * 55}ms` : '0ms',
+                transitionTimingFunction: 'var(--ease-drawer)',
+              }}
+            >
+              {label}
+              {i % 2 === 1 && <span className="text-accent">.</span>}
+            </a>
+          ))}
+        </nav>
+
+        <div className="wrap pb-10">
+          <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-caps text-ink-mute">
+            <span className="dot" />
+            {personalInfo.availability}
+          </div>
+          <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 font-mono text-[13px]">
+            <a className="link" href={personalInfo.socialLinks.github} target="_blank" rel="noopener noreferrer">
+              GitHub
+            </a>
+            <a className="link" href={personalInfo.socialLinks.linkedin} target="_blank" rel="noopener noreferrer">
+              LinkedIn
+            </a>
+            <a className="link" href={`mailto:${personalInfo.socialLinks.email}`}>
+              Email
+            </a>
           </div>
         </div>
-      )}
-    </header>
+      </div>
+    </>
   );
 }
-

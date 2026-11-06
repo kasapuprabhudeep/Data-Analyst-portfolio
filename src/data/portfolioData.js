@@ -1,380 +1,328 @@
 /**
- * Centralized Portfolio Data for Kasapu Prabhudeep
- * 
- * NOTE TO USER:
- * All personal details, project links, certificates, and contact points
- * can be modified directly in this file without editing UI component logic.
+ * ════════════════════════════════════════════════════════════════════
+ *  PRABHUDEEP'S PORTFOLIO — EDIT EVERYTHING HERE
+ * ════════════════════════════════════════════════════════════════════
+ *
+ *  This one file controls the text, links, projects, experience,
+ *  certificates and résumé shown on the website. You never need to
+ *  touch the component files to update content.
+ *
+ *  RULES OF THUMB
+ *  • Fill a field with ""  → that block quietly disappears (no broken UI).
+ *  • Every link must start with https:// (except email:, which starts
+ *    with mailto:).
+ *  • Only write facts you can prove. The site never invents numbers.
+ *
+ *  QUICK RECIPES
+ *  • New résumé ............ replace  public/Prabhudeep_Resume.pdf
+ *                            then bump `resume.lastUpdated` below.
+ *  • New photo ............. replace  public/profile.jpeg
+ *  • New project ........... copy the last object in `projects` and fill
+ *                            every field (keep ids unique, lowercase-dash).
+ *  • New certificate ....... add an object to `certifications` with
+ *                            a Google Drive / issuer verify link.
+ *  ════════════════════════════════════════════════════════════════════
  */
+
+/* ── 1. Who I am ────────────────────────────────────────────────── */
 
 export const personalInfo = {
   name: "Kasapu Prabhudeep",
   firstName: "Prabhudeep",
-  headline: "Aspiring Data Analyst",
-  subHeadline: "Turning Data Into Meaningful Business Insights.",
-  profileImage: "/profile.jpeg",
-  tags: ["Data Analyst", "Python", "SQL", "Excel", "Power BI", "Tableau"],
-  status: "Available for Internships & Full-time Roles",
+  role: "Data Analyst",
+  roleAlt: "Aspiring Data Analyst", // used where humility fits (e.g. footer)
+  statement:
+    "Final-year computer science student turning messy retail and business data into decisions — with Python, SQL, Excel, Power BI and Tableau.",
   location: "Vizianagaram, Andhra Pradesh, India",
+  availability: "Available for internships & full-time roles",
+  nickname: "KP", // monogram in the navbar
+  degree: "B.Tech · Computer Science & Engineering",
   institution: "JNTU-GV College of Engineering, Vizianagaram",
-  degree: "B.Tech in Computer Science and Engineering",
-  academicYear: "2026–2027",
+  classOf: "Class of 2027",
 
-  careerObjective: "To become a professional Data Analyst and solve real-world business problems using data analytics, visualization, SQL, Python, and business intelligence tools.",
-
-  bio: "I am a Computer Science Engineering student passionate about transforming raw data into meaningful business insights. I work with Python, SQL, Excel, Power BI, and Tableau to explore datasets, identify patterns, build interactive dashboards, and communicate data-driven insights. I enjoy solving practical business problems and continuously developing my analytical and technical skills.",
+  portrait: "/profile.jpeg", // replace public/profile.jpeg to change photo
 
   socialLinks: {
+    email: "kasapuprabhudeep@gmail.com",
     github: "https://github.com/kasapuprabhudeep",
-    linkedin: "https://www.linkedin.com/in/kasapurabhudeep/", // Replace with your exact LinkedIn profile URL
-    email: "kasapuprabhudeep@gmail.com", // Replace with your primary email address
-    phonePlaceholder: "+91 98765 43210" // Optional phone contact
+    linkedin: "https://www.linkedin.com/in/kasapurabhudeep/",
   },
 
   resume: {
-    fileName: "Prabhudeep_Resume.pdf",
-    filePath: "/Prabhudeep_Resume.pdf",
-    viewPath: "/Prabhudeep_Resume.pdf",
-    lastUpdated: "November 2026"
-  }
+    fileName: "Prabhudeep_Resume.pdf", // download name shown in browsers
+    filePath: "/Prabhudeep_Resume.pdf", // file it actually serves
+    lastUpdated: "November 2026", // told to visitors — keep it true
+  },
 };
 
-export const analyticalStrengths = [
-  {
-    title: "Data Cleaning & Preprocessing",
-    description: "Handling missing values, outlier detection, schema restructuring, and transforming raw, messy datasets into clean, analysis-ready formats.",
-    icon: "Filter"
-  },
-  {
-    title: "SQL & Database Querying",
-    description: "Writing complex multi-table joins, subqueries, CTEs, aggregation pipelines, and window functions to query relational databases efficiently.",
-    icon: "Database"
-  },
-  {
-    title: "BI & Dashboard Development",
-    description: "Architecting interactive visual dashboards in Power BI and Tableau with calculated fields, DAX measures, and drill-down capabilities.",
-    icon: "BarChart3"
-  },
-  {
-    title: "Exploratory Data Analysis",
-    description: "Uncovering underlying data patterns, customer behaviors, correlation matrixes, and sales drivers using Python (Pandas, NumPy, Matplotlib).",
-    icon: "Search"
-  },
-  {
-    title: "Data Storytelling & Reporting",
-    description: "Bridging the gap between technical data metrics and executive business stakeholders through concise, actionable visual narratives.",
-    icon: "LineChart"
-  },
-  {
-    title: "Business Problem Solving",
-    description: "Translating ambiguous business challenges—such as customer churn or inventory stockouts—into structured analytical frameworks.",
-    icon: "Briefcase"
-  }
+/* ── 2. Career objective (About section intro) ──────────────────── */
+
+export const careerObjective =
+  "To become a professional data analyst and solve real business problems with Python, SQL, visualization and business intelligence.";
+
+export const bio = [
+  "I'm a computer science engineering student at JNTU-GV, Vizianagaram, working my way from spreadsheets to sources: cleaning datasets, querying relational databases, and building dashboards that make a business question answerable in one screen.",
+  "The tools I use most are Python (Pandas · NumPy), SQL, Excel, Power BI and Tableau. What I care about is the reporting layer — turning query output into something a manager can actually act on, without a walkthrough.",
+  "I'm looking for an internship or full-time role where real data flows and the work compounds. Every case study below links to its public repository, so the evidence is directly on the table.",
 ];
 
-export const skillCategories = [
+/* ── 3. What I bring (numbered strengths in About) ───────────────── */
+
+export const strengths = [
   {
-    category: "Programming",
-    icon: "Code2",
-    description: "Core languages for scripting, algorithmic data manipulation, and software fundamentals.",
-    skills: [
-      { name: "Python", type: "Primary", highlight: true },
-      { name: "Java", type: "Core", highlight: false },
-      { name: "C", type: "Foundational", highlight: false }
-    ]
+    title: "Data cleaning & preprocessing",
+    description:
+      "Missing values, outliers, schema restructuring — raw exports turned into analysis-ready tables.",
   },
   {
-    category: "Data Analytics",
-    icon: "Database",
-    description: "Relational database querying, quantitative analysis, and preprocessing workflows.",
-    skills: [
-      { name: "SQL", type: "Primary", highlight: true },
-      { name: "MySQL", type: "Relational DB", highlight: true },
-      { name: "Advanced Excel", type: "Formulas & Pivot Tables", highlight: true },
-      { name: "Data Cleaning", type: "Preprocessing", highlight: true },
-      { name: "Exploratory Data Analysis", type: "EDA & Statistics", highlight: true }
-    ]
+    title: "SQL & database querying",
+    description:
+      "Multi-table joins, CTEs, aggregations and window functions against relational databases.",
   },
   {
-    category: "Visualization & BI",
-    icon: "PieChart",
-    description: "Business intelligence tools for visual metrics, KPI tracking, and interactive dashboards.",
-    skills: [
-      { name: "Power BI", type: "Dashboards & DAX", highlight: true },
-      { name: "Tableau", type: "Visual Analytics", highlight: true },
-      { name: "Power Query", type: "ETL & Transformation", highlight: false },
-      { name: "Data Visualization", type: "Visual Storytelling", highlight: true }
-    ]
+    title: "BI & dashboard development",
+    description:
+      "Interactive Power BI and Tableau dashboards with calculated fields, DAX measures and drill-downs.",
   },
   {
-    category: "Web Technologies",
-    icon: "Globe",
-    description: "Foundational frontend technologies for web interfaces and data presentation.",
-    skills: [
-      { name: "HTML", type: "Markup", highlight: false },
-      { name: "CSS", type: "Styling", highlight: false },
-      { name: "JavaScript", type: "Scripting", highlight: false }
-    ]
+    title: "Exploratory data analysis",
+    description:
+      "Distributions, correlations and segments — pattern-hunting in Python with Pandas and NumPy.",
   },
   {
-    category: "Developer Tools",
-    icon: "Wrench",
-    description: "Industry-standard development environments, database managers, and version control.",
-    skills: [
-      { name: "VS Code", type: "IDE", highlight: false },
-      { name: "MySQL Workbench", type: "DB Administration", highlight: true },
-      { name: "Git", type: "Version Control", highlight: false },
-      { name: "GitHub", type: "Collaboration", highlight: true }
-    ]
-  }
+    title: "Data storytelling & reporting",
+    description:
+      "Converting query output into concise visual narratives that non-technical stakeholders can read.",
+  },
+  {
+    title: "Business problem framing",
+    description:
+      "Ambiguous situations — churn, stockouts, margin pressure — turned into structured analytical questions.",
+  },
 ];
+
+/* ── 4. Toolkit (grouped skills, shown inside About) ─────────────── */
+/* type within skillCategories-style groups: keep each group to one row */
+
+export const toolkit = [
+  { group: "Analysis", items: ["Python", "Pandas", "NumPy", "SQL", "MySQL", "Advanced Excel"] },
+  { group: "Visualization", items: ["Power BI", "Tableau", "Matplotlib", "Seaborn", "Power Query"] },
+  { group: "Backend & data", items: ["Flask", "MongoDB", "Neo4j"] },
+  { group: "Fundamentals", items: ["Java", "C", "HTML", "CSS", "JavaScript"] },
+  { group: "Workflow", items: ["Git", "GitHub", "VS Code", "MySQL Workbench", "Jupyter"] },
+];
+
+/* ── 5. Projects (Selected work) ────────────────────────────────── */
+/*
+ * `image` is an OPTIONAL screenshot. Leave "" → the site renders a clean
+ * typographic row (no fake previews). To use a screenshot: drop the file
+ * into public/images/projects/ and set image: "/images/projects/name.png".
+ * `liveDemo` only ever shows when you provide a working URL.
+ */
 
 export const projects = [
   {
     id: "retail-sales-analysis",
-    title: "Retail Sales Data Analysis",
-    subtitle: "End-to-End Sales Performance, Product & Demographic Analytics",
+    title: "Retail sales analysis",
+    tagline: "End-to-end sales performance, category revenue and customer demographics",
     category: "Data Analytics & BI",
     featured: true,
-    technologies: ["Python", "MySQL", "Power BI", "Data Cleaning", "DAX"],
-    overview: "An end-to-end retail sales analysis project focused on understanding overall store performance, category-level revenues, regional distribution, and customer purchase demographics.",
-    businessProblem: "Retail managers often lack consolidated visibility into which product categories yield healthy profit margins versus high volume, and which customer cohorts exhibit the highest lifetime value.",
-    keyFeatures: [
-      "Extensive data cleaning and validation using Python (Pandas) to eliminate anomalies and handle missing values.",
-      "Custom SQL queries to aggregate multi-year transactions, compute sales growth, and group demographic tiers.",
-      "In-depth customer segmentation to identify high-value consumer groups and repeat buyers.",
-      "Category-wise performance analysis comparing sales volume, revenue, and return frequency.",
-      "Interactive Power BI dashboard featuring dynamic slicers, KPI summary cards, and regional heatmaps."
+    stack: ["Python", "MySQL", "Power BI", "DAX"],
+    overview:
+      "An end-to-end retail analysis that looks at store performance by category, revenue by region, and who the customers actually are.",
+    problem:
+      "Managers lacked a consolidated view of which product categories earn healthy margins versus raw volume, and which customer cohorts were worth keeping.",
+    contributions: [
+      "Cleaned and validated multi-year transaction data with Python (Pandas), handling anomalies and missing values.",
+      "Wrote SQL aggregations across transactions to compute sales growth and group customers into demographic tiers.",
+      "Segmented customers to isolate high-value and repeat-buyer groups.",
+      "Built a Power BI dashboard with dynamic slicers, KPI cards and regional heatmaps.",
     ],
-    metricsPreview: [
-      { label: "Category Analyzed", value: "Electronics & Apparel" },
-      { label: "Queries Created", value: "25+ Analytical SQL Views" },
-      { label: "Dashboard Pages", value: "3 Dynamic Reports" }
-    ],
-    github: "https://github.com/kasapuprabhudeep/Sales-dashboard-analysis", // Replace with specific repository link if separate
-    liveDemo: null,
-    dashboardPreviewType: "retail",
-    image: "/images/projects/retail-sales.png"
+    repo: "https://github.com/kasapuprabhudeep/Sales-dashboard-analysis",
+    liveDemo: "",
+    image: "",
   },
   {
     id: "customer-churn-analysis",
-    title: "Customer Churn Analysis",
-    subtitle: "Investigating Customer Attrition & Retention Patterns",
+    title: "Customer churn analysis",
+    tagline: "Retention patterns, tenure risk and churn drivers — Tableau story",
     category: "Data Analytics & BI",
     featured: true,
-    technologies: ["Tableau", "Data Analytics", "EDA", "Customer Segmentation"],
-    overview: "An analytical investigation designed to dissect customer churn patterns, evaluate tenure distributions, and pinpoint primary drivers behind client attrition.",
-    businessProblem: "Customer acquisition costs substantially exceed retention expenses. Without granular visibility into when and why customers terminate subscriptions, retention interventions remain ineffective.",
-    keyFeatures: [
-      "Rigorous exploratory analysis identifying correlations between contract type, monthly charges, and churn probability.",
-      "Customer cohort segmentation isolating high-risk accounts based on service tickets and tenure.",
-      "Interactive Tableau worksheets linking churn rate across payment methods and demographic segments.",
-      "Visual reporting dashboard enabling account managers to simulate retention intervention outcomes.",
-      "Actionable recommendations formulated to target high-risk customer segments proactively."
+    stack: ["Tableau", "EDA", "Customer segmentation"],
+    overview:
+      "An analytical study of customer attrition: when customers leave, why, and which intervention actually makes sense.",
+    problem:
+      "Acquisition costs far exceed retention costs — but without knowing when and why subscribers cancel, retention spending fires blind.",
+    contributions: [
+      "Explored correlations between contract type, monthly charges, tenure and churn probability.",
+      "Segmented cohorts to isolate high-risk accounts.",
+      "Built linked Tableau worksheets comparing churn across payment methods and demographics.",
+      "Closed with written recommendations targeting the riskiest segments first.",
     ],
-    metricsPreview: [
-      { label: "Core Focus", value: "Churn Drivers & Tenure" },
-      { label: "Visual Format", value: "Interactive Tableau Story" },
-      { label: "Key Segment", value: "Month-to-Month Contracts" }
-    ],
-    github: "https://github.com/kasapuprabhudeep",
-    liveDemo: null,
-    dashboardPreviewType: "churn",
-    image: "/images/projects/customer-churn.png"
+    repo: "https://github.com/kasapuprabhudeep/FUTURE_DS_02",
+    liveDemo: "",
+    image: "",
   },
   {
     id: "movie-recommendation-system",
-    title: "Movie Recommendation & Review System",
-    subtitle: "Hybrid Document & Graph Database Discovery Platform",
+    title: "Movie recommendation & review system",
+    tagline: "Flask app on a polyglot stack — MongoDB documents + Neo4j graph",
     category: "Full Stack & Databases",
     featured: true,
-    technologies: ["Python", "Flask", "MongoDB", "Neo4j", "HTML", "CSS", "JavaScript"],
-    overview: "A movie recommendation and review application that combines document-based storage for rich metadata with graph database relationships to deliver personalized movie discovery.",
-    businessProblem: "Traditional relational databases struggle to efficiently model complex interconnected relationships such as user review networks, co-actors, directors, and shared genre affinities at scale.",
-    keyFeatures: [
-      "Utilized Neo4j graph database to model multi-hop entity relationships (actors, directors, genres, and user ratings).",
-      "Integrated MongoDB for flexible document storage of movie details, user profiles, and review transcripts.",
-      "Developed a Python Flask RESTful backend coordinating querying across both NoSQL databases.",
-      "Responsive frontend UI for browsing catalogs, submitting ratings, and viewing graph-derived recommendations.",
-      "Personalized recommendation logic utilizing graph traversals for similar movie discovery."
+    stack: ["Python", "Flask", "MongoDB", "Neo4j"],
+    overview:
+      "A discovery app where document storage handles rich movie metadata and a graph database handles the relationships that drive recommendations.",
+    problem:
+      "Relational schemas model poorly the very thing recommendations depend on: multi-hop relationships between users, reviews, co-actors and genres.",
+    contributions: [
+      "Modelled actors, directors, genres and user ratings as a Neo4j graph with multi-hop traversals.",
+      "Stored movie details, profiles and reviews as MongoDB documents.",
+      "Built a Flask backend coordinating queries across both databases.",
+      "Shipped a responsive frontend for browsing, rating and graph-derived 'similar movies'.",
     ],
-    metricsPreview: [
-      { label: "Architecture", value: "Polyglot Persistence" },
-      { label: "Databases", value: "MongoDB + Neo4j Graph" },
-      { label: "Backend", value: "Python / Flask API" }
-    ],
-    github: "https://github.com/kasapuprabhudeep/movie-recommendation-review-system",
-    liveDemo: null,
-    dashboardPreviewType: "graph",
-    image: "/images/projects/movie-rec.png"
+    repo: "https://github.com/kasapuprabhudeep/movie-recommendation-review-system",
+    liveDemo: "",
+    image: "",
   },
   {
     id: "future-ds-01",
-    title: "Future Interns: Data Analytics Project 01",
-    subtitle: "Dataset Preprocessing, Statistical Exploration & Visualization",
+    title: "Future Interns — analytics project 01",
+    tagline: "Dataset preprocessing, statistical exploration and visual reporting",
     category: "Internship Projects",
     featured: false,
-    technologies: ["Python", "Pandas", "Matplotlib", "Seaborn", "Data Cleaning"],
-    overview: "A hands-on data science and analytics project completed during the Future Interns summer internship focusing on comprehensive dataset exploration and diagnostic analysis.",
-    businessProblem: "Raw industry data frequently suffers from inconsistent formats, missing indicators, and unstandardized scales that require rigorous preparation before extracting insights.",
-    keyFeatures: [
-      "Applied statistical summaries to identify distributions, skewness, and variance across variables.",
-      "Implemented programmatic data transformation pipelines using Pandas and NumPy.",
-      "Crafted correlation heatmaps and bivariate distribution plots using Seaborn.",
-      "Documented analytical deductions and step-by-step methodologies in clean Jupyter notebooks."
+    stack: ["Python", "Pandas", "Matplotlib", "Seaborn"],
+    overview:
+      "First deliverable of the Future Interns data science internship: prepare a raw industry dataset, then interrogate it.",
+    problem:
+      "Raw industry data arrives with inconsistent formats and missing indicators that break analysis before it starts.",
+    contributions: [
+      "Audited schemas and cleaned the dataset programmatically with Pandas.",
+      "Profiled distributions, skewness and variance across variables.",
+      "Produced correlation heatmaps and bivariate plots in Seaborn.",
+      "Documented every method step in reproducible notebooks.",
     ],
-    metricsPreview: [
-      { label: "Program", value: "Future Interns" },
-      { label: "Domain", value: "Exploratory Analytics" },
-      { label: "Deliverable", value: "Cleaned Data & Insights" }
-    ],
-    github: "https://github.com/kasapuprabhudeep/FUTURE_DS_01",
-    liveDemo: null,
-    dashboardPreviewType: "stats",
-    image: "/images/projects/future-ds-01.png"
+    repo: "https://github.com/kasapuprabhudeep/FUTURE_DS_01",
+    liveDemo: "",
+    image: "",
   },
   {
     id: "future-ds-02",
-    title: "Future Interns: Data Analytics Project 02",
-    subtitle: "Hypothesis Testing, Feature Analysis & Business Insights",
+    title: "Future Interns — analytics project 02",
+    tagline: "Churn and retention reporting delivered as a Tableau story",
     category: "Internship Projects",
     featured: false,
-    technologies: ["Python", "SQL", "Data Visualization", "Statistical Analysis"],
-    overview: "Second analytical project completed under the Future Interns internship, expanding into hypothesis verification, trend forecasting, and executive reporting.",
-    businessProblem: "Understanding multi-variable dependencies in operational data to inform strategic decision-making and performance benchmarking.",
-    keyFeatures: [
-      "Formulated and evaluated data-driven hypotheses against cleaned operational datasets.",
-      "Built visual reporting charts highlighting cyclical trends and seasonal anomalies.",
-      "Summarized findings into structured presentation decks suited for non-technical evaluation.",
-      "Demonstrated reproducible analytics workflows and clean code documentation."
+    stack: ["Python", "SQL", "Tableau"],
+    overview:
+      "Second deliverable of the internship: the customer retention study shown above, framed and reported to an internship standard.",
+    problem:
+      "Retention reporting had to hold up as a standalone artifact for non-technical evaluation.",
+    contributions: [
+      "Built the retention analysis end-to-end in Tableau.",
+      "Structured findings into a story format readable without analyst context.",
+      "Backed every visual with a reproducible query or notebook.",
     ],
-    metricsPreview: [
-      { label: "Program", value: "Future Interns" },
-      { label: "Focus", value: "Trend & Hypothesis Testing" },
-      { label: "Deliverable", value: "Analytical Report" }
-    ],
-    github: "https://github.com/kasapuprabhudeep/FUTURE_DS_02",
-    liveDemo: null,
-    dashboardPreviewType: "trend",
-    image: "/images/projects/future-ds-02.png"
-  }
+    repo: "https://github.com/kasapuprabhudeep/FUTURE_DS_02",
+    liveDemo: "",
+    image: "",
+  },
 ];
 
-export const internshipExperience = [
+/* ── 6. Experience ──────────────────────────────────────────────── */
+/* Leave `period: ""` if you don't have exact dates — the UI adapts. */
+
+export const experience = [
   {
     id: "future-interns",
-    company: "Future Interns",
+    organization: "Future Interns",
     role: "Data Science & Analytics Intern",
-    period: "May 2026 – July 2026",
-    type: "Remote Internship",
-    summary: "Engaged in hands-on data analytics assignments involving real-world datasets, structured exploratory data analysis, and visual insight generation.",
-    responsibilities: [
-      "Conducted thorough dataset exploration, schema auditing, and data cleaning across diverse multi-attribute datasets.",
-      "Formulated analytical problem statements and leveraged Python (Pandas, NumPy) to compute core descriptive statistics.",
-      "Constructed visual data charts, correlation plots, and distribution summaries to isolate trends and outliers.",
-      "Authored detailed project documentation, summarizing methodologies, analytical observations, and actionable conclusions.",
-      "Completed assigned milestones within structured sprint timelines, submitting verified project deliverables (FUTURE_DS_01 & FUTURE_DS_02)."
+    kind: "Remote internship",
+    period: "May 2026 – Jul 2026", // ← update here when dates change
+    summary:
+      "Internship structured around dataset preparation, exploratory analysis and documented reporting — delivered as two graded projects.",
+    highlights: [
+      "Cleaned and audited diverse multi-attribute datasets before any analysis ran.",
+      "Computed descriptive statistics and distribution profiles with Pandas and NumPy.",
+      "Built visual reports — distribution charts, correlation plots — to isolate trends and outliers.",
+      "Delivered both graded projects (see Future Interns 01 & 02 in Selected work).",
     ],
-    skillsApplied: ["Python", "Data Exploration", "Data Cleaning", "Data Visualization", "Problem Solving", "Documentation"],
-    hasCertificate: true,
-    certificateTitle: "Future Interns – Data Science & Analytics Certificate",
-    certificateImage: "/images/certificates/future-interns.svg",
-    verificationLink: "https://drive.google.com/file/d/1_WEuvtMgW4JPFc-PsHWp2_DqeXi1sS_N/view?usp=sharing"
+    tools: ["Python", "SQL", "Tableau", "Pandas"],
+    proof: {
+      label: "Verify certificate",
+      url: "https://drive.google.com/file/d/1_WEuvtMgW4JPFc-PsHWp2_DqeXi1sS_N/view?usp=sharing",
+    },
   },
   {
     id: "internship-studio",
-    company: "Internship Studio",
+    organization: "Internship Studio",
     role: "Data Analytics Intern / Trainee",
-    period: "Internship / Trainee Program",
-    type: "Virtual Training & Project Internship",
-    summary: "Underwent intensive hands-on training in core data analytics tools followed by real-world retail sales analysis and interactive business intelligence dashboard creation.",
-    responsibilities: [
-      "Analyzed end-to-end retail sales transaction data to evaluate revenue metrics, regional distribution, and product performance.",
-      "Wrote structured MySQL queries to extract, filter, join, and aggregate transactional database records.",
-      "Designed and deployed an interactive Power BI dashboard featuring dynamic filters, KPI cards, and trend visuals.",
-      "Delivered structured data-driven reports translating complex dataset findings into clear business observations."
+    kind: "Virtual training & project internship",
+    period: "", // ← fill in real dates when known
+    summary:
+      "Structured training in core analytics tools, applied to an end-to-end retail sales analysis with a business intelligence dashboard.",
+    highlights: [
+      "Analyzed retail transactions for revenue, regional spread and product performance.",
+      "Wrote structured MySQL queries — filters, joins and aggregations over transactional records.",
+      "Designed and deployed an interactive Power BI dashboard with dynamic filters and KPI cards.",
+      "Reported findings as structured summaries for non-technical readers.",
     ],
-    skillsApplied: ["MySQL", "Python", "Power BI", "Retail Sales Analysis", "DAX", "Data Storytelling"],
-    hasCertificate: true,
-    certificateTitle: "Internship Studio – Data Analytics Trainee Certificate",
-    certificateImage: "/images/certificates/internship-studio.svg",
-    verificationLink: "https://drive.google.com/file/d/1S9wtxbQou2G0jBaKsfx1W9MRB0hm4S5E/view?usp=sharing"
-  }
+    tools: ["MySQL", "Power BI", "Python", "DAX"],
+    proof: {
+      label: "Verify certificate",
+      url: "https://drive.google.com/file/d/1S9wtxbQou2G0jBaKsfx1W9MRB0hm4S5E/view?usp=sharing",
+    },
+  },
 ];
+
+/* ── 7. Certifications (credential rows with verify links) ──────── */
 
 export const certifications = [
   {
     id: "freecodecamp-python",
     title: "Data Analysis with Python",
     issuer: "freeCodeCamp",
-    category: "Data Analytics & Python",
-    description: "Hands-on certification covering data analysis using Python, Pandas, NumPy, Matplotlib, and statistical data processing.",
-    badge: "Verified Credential",
-    image: "/images/certificates/freecodecamp.svg",
-    verificationUrl: "https://drive.google.com/file/d/1belqZ1sTeEdKYirE3bbh6LwkE4TczCxB/view?usp=sharing", // Replace with your link
-    topics: ["Pandas", "NumPy", "Matplotlib", "Seaborn", "Data Cleaning", "Statistical Modeling"]
+    category: "Python & statistics",
+    description: "Pandas, NumPy, Matplotlib and statistical processing, assessed by project.",
+    verify: {
+      label: "Verify credential",
+      url: "https://drive.google.com/file/d/1belqZ1sTeEdKYirE3bbh6LwkE4TczCxB/view?usp=sharing",
+    },
   },
   {
     id: "future-interns-cert",
     title: "Data Science & Analytics",
     issuer: "Future Interns",
-    category: "Industry Internship",
-    description: "Practical internship certification validating dataset preprocessing, exploratory analysis, and analytical problem-solving.",
-    badge: "Internship Completion",
-    image: "/images/certificates/future-interns.svg",
-    verificationUrl: "https://drive.google.com/file/d/1_WEuvtMgW4JPFc-PsHWp2_DqeXi1sS_N/view?usp=sharing",
-    topics: ["Dataset Exploration", "Analytical Reasoning", "Python EDA", "Project Documentation"]
+    category: "Industry internship",
+    description: "Certified completion of the internship's dataset and reporting track.",
+    verify: {
+      label: "Verify credential",
+      url: "https://drive.google.com/file/d/1_WEuvtMgW4JPFc-PsHWp2_DqeXi1sS_N/view?usp=share_link",
+    },
   },
   {
     id: "internship-studio-cert",
-    title: "Data Analytics Certification",
+    title: "Data Analytics",
     issuer: "Internship Studio",
-    category: "Industry Training",
-    description: "Trainee certification focused on practical retail analytics, MySQL querying, and Power BI dashboard engineering.",
-    badge: "Trainee Credential",
-    image: "/images/certificates/internship-studio.svg",
-    verificationUrl: "https://drive.google.com/file/d/1S9wtxbQou2G0jBaKsfx1W9MRB0hm4S5E/view?usp=sharing",
-    topics: ["MySQL Queries", "Power BI Dashboards", "Sales Analytics", "DAX Measures"]
-  }
+    category: "Industry training",
+    description: "Trainee credential for retail analytics, MySQL querying and Power BI work.",
+    verify: {
+      label: "Verify credential",
+      url: "https://drive.google.com/file/d/1S9wtxbQou2G0jBaKsfx1W9MRB0hm4S5E/view?usp=sharing",
+    },
+  },
 ];
+
+/* ── 8. Education ───────────────────────────────────────────────── */
 
 export const educationHistory = [
   {
-    degree: "B.Tech in Computer Science and Engineering",
+    degree: "B.Tech · Computer Science & Engineering",
     institution: "JNTU-GV College of Engineering, Vizianagaram",
-    academicYear: "2026–2027",
-    status: "Final Year Student",
-    description: "Pursuing Bachelor of Technology with a dedicated specialization in data structures, relational database management systems, programming in Python/Java/C, and modern data analytics paradigms.",
-    highlights: [
-      "Comprehensive coursework in Database Management Systems (DBMS), Data Structures & Algorithms, and Operating Systems.",
-      "Active focus on practical data analysis, SQL database querying, and dashboard design.",
-      "Collaboration on academic software engineering and database projects including polyglot movie discovery platforms."
-    ]
-  }
+    academicYear: "2023 – 2027", // ← keep this the class timeline you can defend
+    status: "Final-year student",
+    focus: [
+      "Core coursework: DBMS, data structures & algorithms, operating systems",
+      "Practical thread kept on SQL querying and dashboard design",
+      "Project work includes a polyglot-database discovery application",
+    ],
+  },
 ];
-
-// Interactive mock data for real-time Recharts dashboards in the portfolio
-export const liveSalesData = [
-  { month: "Jan", sales: 42000, profit: 12400, target: 40000 },
-  { month: "Feb", sales: 48000, profit: 14800, target: 45000 },
-  { month: "Mar", sales: 55000, profit: 18200, target: 50000 },
-  { month: "Apr", sales: 51000, profit: 15600, target: 52000 },
-  { month: "May", sales: 63000, profit: 21500, target: 58000 },
-  { month: "Jun", sales: 72000, profit: 26300, target: 65000 },
-  { month: "Jul", sales: 68000, profit: 24100, target: 67000 },
-  { month: "Aug", sales: 79000, profit: 29500, target: 72000 }
-];
-
-export const categoryBreakdownData = [
-  { name: "Electronics", value: 38, fill: "#38BDF8" },
-  { name: "Apparel", value: 26, fill: "#0284C7" },
-  { name: "Home & Kitchen", value: 21, fill: "#22D3EE" },
-  { name: "Books & Media", value: 15, fill: "#818CF8" }
-];
-
-export const churnCohortData = [
-  { tenureGroup: "0-6 Mo", active: 62, churned: 38 },
-  { tenureGroup: "7-12 Mo", active: 76, churned: 24 },
-  { tenureGroup: "13-24 Mo", active: 88, churned: 12 },
-  { tenureGroup: "25+ Mo", active: 94, churned: 6 }
-];
-

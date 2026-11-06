@@ -22,4 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+skills-lock.json
+.agents
 
+
+# screenshot verification output
+shots/

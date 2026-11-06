@@ -1,79 +1,92 @@
-import React, { useState } from 'react';
-import SectionHeader from '../common/SectionHeader';
-import ProjectCard from './ProjectCard';
-import ProjectDetailModal from './ProjectDetailModal';
+import React, { useMemo, useState } from 'react';
+import { ArrowUpRight } from 'lucide-react';
 import { projects } from '../../data/portfolioData';
-import { FolderGit2, CheckCircle2 } from 'lucide-react';
+import SectionHead from '../common/SectionHead';
+import ProjectDetailModal from './ProjectDetailModal';
 
+/**
+ * Selected work — an editorial case list, not a card grid.
+ * Rows open a case-study dialog; filters derive themselves from the data.
+ */
 export default function Projects() {
-  const [selectedFilter, setSelectedFilter] = useState('All');
-  const [activeProjectModal, setActiveProjectModal] = useState(null);
+  const [filter, setFilter] = useState('All');
+  const [activeId, setActiveId] = useState(null);
 
-  const filterTabs = ['All', 'Data Analytics & BI', 'Full Stack & Databases', 'Internship Projects'];
-
-  const filteredProjects = selectedFilter === 'All'
-    ? projects
-    : projects.filter(p => p.category === selectedFilter);
+  const categories = useMemo(
+    () => ['All', ...new Set(projects.map((project) => project.category))],
+    []
+  );
+  const shown = filter === 'All' ? projects : projects.filter((p) => p.category === filter);
+  const active = projects.find((p) => p.id === activeId) ?? null;
 
   return (
-    <section id="projects" className="py-20 md:py-28 relative bg-slate-50/50 dark:bg-navy-950/40">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <SectionHeader
-          badge="Featured Projects"
-          title="Analytical Projects & Business Dashboards"
-          subtitle="Explore practical applications combining Python exploratory data analysis, MySQL database querying, and interactive Power BI & Tableau dashboards."
+    <section id="work" className="relative z-10 bg-paper-deep">
+      <div className="wrap py-24 md:py-32">
+        <SectionHead
+          title="Selected work"
+          meta={`${projects.length} case studies · source code public`}
         />
 
-        {/* Filter Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
-          {filterTabs.map((tab) => (
+        {/* Category filters — derived, never hard-coded */}
+        <div data-reveal className="mb-6 flex flex-wrap gap-2">
+          {categories.map((category) => (
             <button
-              key={tab}
-              onClick={() => setSelectedFilter(tab)}
-              className={`px-4 py-2 rounded-xl text-xs md:text-sm font-medium transition-all duration-200 border ${
-                selectedFilter === tab
-                  ? 'bg-electric-600 border-electric-500 text-white shadow-md shadow-electric-600/30 font-semibold'
-                  : 'bg-white dark:bg-navy-900/60 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:border-cyan-400/50 hover:bg-slate-50 dark:hover:bg-slate-800'
-              }`}
+              key={category}
+              type="button"
+              onClick={() => setFilter(category)}
+              aria-pressed={filter === category}
+              className={`chip ${filter === category ? 'chip-active' : ''}`}
             >
-              {tab}
+              {category}
             </button>
           ))}
         </div>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project, index) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              index={index}
-              onOpenDetails={(p) => setActiveProjectModal(p)}
-            />
+        <p data-reveal className="mb-4 text-[13.5px] text-ink-mute">
+          {shown.length} {shown.length === 1 ? 'project' : 'projects'} — open any row for the full
+          case study.
+        </p>
+
+        {/* Case rows */}
+        <ul className="border-t border-line" data-reveal>
+          {shown.map((project, i) => (
+            <li key={project.id} className="border-b border-line">
+              <button
+                type="button"
+                onClick={() => setActiveId(project.id)}
+                className="case-row group w-full text-left"
+              >
+                <span className="case-index tabular" aria-hidden="true">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+
+                <span className="min-w-0">
+                  <span className="mb-2 block font-mono text-[10.5px] uppercase tracking-caps text-ink-faint">
+                    {project.category}
+                  </span>
+                  <span className="block font-display text-display-3 text-ink transition-colors duration-200 group-hover:text-accent-deep">
+                    {project.title}
+                  </span>
+                  <span className="mt-1.5 block max-w-[62ch] text-[15px] leading-relaxed text-ink-soft">
+                    {project.tagline}
+                  </span>
+                  <span className="mt-3.5 flex flex-wrap items-center gap-1.5">
+                    {project.stack.map((tech) => (
+                      <span key={tech} className="chip !text-[11px]">
+                        {tech}
+                      </span>
+                    ))}
+                  </span>
+                </span>
+
+                <ArrowUpRight className="case-arrow h-5 w-5" aria-hidden="true" />
+              </button>
+            </li>
           ))}
-        </div>
-
-        {/* Recruiter assurance banner */}
-        <div className="mt-12 p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-navy-900/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
-          <div className="flex items-center gap-2">
-            <FolderGit2 className="w-4 h-4 text-cyan-400" />
-            <span>All code repositories, SQL queries, and Power BI models are structured with clean commit logs and modular scripts.</span>
-          </div>
-          <span className="font-mono text-cyan-500 font-semibold flex-shrink-0">
-            5 Documented Projects
-          </span>
-        </div>
-
+        </ul>
       </div>
 
-      {/* Case Study Modal */}
-      <ProjectDetailModal
-        project={activeProjectModal}
-        isOpen={!!activeProjectModal}
-        onClose={() => setActiveProjectModal(null)}
-      />
+      <ProjectDetailModal project={active} onClose={() => setActiveId(null)} />
     </section>
   );
 }
-
