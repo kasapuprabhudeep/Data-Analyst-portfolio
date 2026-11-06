@@ -141,3 +141,4 @@ export default function LiveDataDashboardPreview({ type }) {
     </div>
   );
 }
+

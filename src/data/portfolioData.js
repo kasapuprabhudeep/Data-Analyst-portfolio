@@ -398,3 +398,4 @@ export const churnCohortData = [
   { tenureGroup: "13-24 Mo", active: 88, churned: 12 },
   { tenureGroup: "25+ Mo", active: 94, churned: 6 }
 ];
+

@@ -90,3 +90,4 @@ export default function SkillCard({ category, index }) {
     </motion.div>
   );
 }
+

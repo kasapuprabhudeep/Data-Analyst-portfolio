@@ -131,3 +131,4 @@ export default function ProjectDetailModal({ project, isOpen, onClose }) {
     </Modal>
   );
 }
+

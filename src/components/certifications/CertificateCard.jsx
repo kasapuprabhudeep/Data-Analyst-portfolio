@@ -85,3 +85,4 @@ export default function CertificateCard({ cert, index, onPreview }) {
     </motion.div>
   );
 }
+

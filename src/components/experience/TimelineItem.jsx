@@ -106,3 +106,4 @@ export default function TimelineItem({ exp, index, onPreviewCertificate }) {
     </motion.div>
   );
 }
+

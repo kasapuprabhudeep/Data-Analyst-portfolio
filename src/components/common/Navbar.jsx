@@ -176,3 +176,4 @@ export default function Navbar({ isDark, toggleTheme, activeSection }) {
     </header>
   );
 }
+

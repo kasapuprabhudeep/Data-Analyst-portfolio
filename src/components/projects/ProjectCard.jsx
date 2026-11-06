@@ -133,3 +133,4 @@ export default function ProjectCard({ project, onOpenDetails, index }) {
     </motion.div>
   );
 }
+

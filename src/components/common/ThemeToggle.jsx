@@ -20,3 +20,4 @@ export default function ThemeToggle({ isDark, toggleTheme }) {
     </button>
   );
 }
+

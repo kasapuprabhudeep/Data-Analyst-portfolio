@@ -237,3 +237,4 @@ Once your site is live on Vercel:
 
 ## 📄 License
 This portfolio is open source and available under the [MIT License](LICENSE).
+
