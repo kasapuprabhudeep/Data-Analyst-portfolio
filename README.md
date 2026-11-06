@@ -178,7 +178,7 @@ Vercel provides zero-configuration hosting with instant global CDN distribution,
    git add .
    git commit -m "feat: complete premium data analyst portfolio"
    git branch -M main
-   git remote add origin https://github.com/kasapuprabhudeep/portfolio.git
+   git remote add origin https://github.com/kasapuprabhudeep/Data-Analyst-portfolio.git
    git push -u origin main
    ```
 
